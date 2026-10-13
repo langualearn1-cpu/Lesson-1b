@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glory English Academy - Interactive Worksheet Exercises</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Fredoka & Outfit for engaging educational design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti for celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background: radial-gradient(circle at 12% 15%, #fdf2f8 0%, #eff6ff 40%, #ecfdf5 75%, #fffbeb 100%);
+      min-height: 100vh;
+      user-select: none;
+    }
+
+    .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Audio-Image Active Synchronization Glow */
+    .sync-image-active {
+      transform: scale(1.08) !important;
+      filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 30px rgba(99, 102, 241, 0.45));
+      animation: pulseSyncGlow 1.2s ease-in-out infinite alternate;
+      border-color: #f59e0b !important;
+      background-color: #fefce8 !important;
+    }
+
+    @keyframes pulseSyncGlow {
+      0% {
+        transform: scale(1.04);
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.4), 0 10px 25px -5px rgba(245, 158, 11, 0.3);
+      }
+      100% {
+        transform: scale(1.10);
+        box-shadow: 0 0 0 8px rgba(245, 158, 11, 0.8), 0 20px 30px -5px rgba(245, 158, 11, 0.5);
+      }
+    }
+
+    /* Word synchronization highlight */
+    .sync-word-active {
+      background: linear-gradient(135deg, #fef08a, #fde047) !important;
+      color: #854d0e !important;
+      border-color: #eab308 !important;
+      transform: scale(1.08);
+      display: inline-block;
+      box-shadow: 0 4px 14px rgba(234, 179, 8, 0.5);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Sound indicator bars */
+    .sound-bars-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 18px;
+    }
+    .sound-bar-item {
+      width: 3.5px;
+      background-color: #ec4899;
+      border-radius: 9999px;
+      animation: soundWaveBounce 0.8s ease-in-out infinite;
+    }
+    .sound-bar-item:nth-child(2) { animation-delay: 0.15s; background-color: #8b5cf6; }
+    .sound-bar-item:nth-child(3) { animation-delay: 0.3s; background-color: #3b82f6; }
+    .sound-bar-item:nth-child(4) { animation-delay: 0.45s; background-color: #10b981; }
+
+    @keyframes soundWaveBounce {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+
+    /* Micro-interactions */
+    .btn-bounce {
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+    }
+    .btn-bounce:hover {
+      transform: translateY(-2px);
+    }
+    .btn-bounce:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes shakeSoft {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .shake-anim {
+      animation: shakeSoft 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased p-3 sm:p-6 overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="max-w-6xl mx-auto mb-6">
+    <div class="bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border border-white/80 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-4 text-center md:text-left">
+        <!-- Glory Academy Stylized Emblem -->
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-400 via-indigo-600 to-purple-600 p-0.5 shadow-lg shadow-indigo-300/40 flex items-center justify-center shrink-0">
+          <div class="w-full h-full bg-white rounded-[14px] flex flex-col items-center justify-center p-1">
+            <span class="text-xl leading-none">📖</span>
+            <span class="text-[9px] font-black text-indigo-900 tracking-tighter uppercase mt-0.5">Glory</span>
+          </div>
+        </div>
+
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-heading font-black text-slate-900 tracking-tight flex items-center justify-center md:justify-start flex-wrap gap-2">
+            Glory English Academy
+            <span class="text-xs bg-rose-50 text-rose-700 font-bold px-3 py-1 rounded-full border border-rose-200 shadow-sm flex items-center gap-1.5">
+              <span>🇬🇧</span> British Accent (Female)
+            </span>
+            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full border border-emerald-300">
+              مترجم بالعربية 🇸🇦
+            </span>
+            <span class="text-xs bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full border border-amber-300">
+              Live Sound-Image Sync 🎙️
+            </span>
+          </h1>
+          <p class="text-sm text-slate-500 font-medium">تمارين تفاعلية: أكمل الجمل، وصِل الصور بالجمل، واكتشف الحرف الناقص مع الترجمة والنطق البريطاني!</p>
+        </div>
+      </div>
+
+      <!-- Header Tools & Score -->
+      <div class="flex items-center flex-wrap justify-center gap-3">
+        <!-- Star Score -->
+        <div class="flex items-center gap-2.5 bg-amber-50 border-2 border-amber-300 px-4 py-2 rounded-2xl shadow-sm">
+          <span class="text-2xl animate-bounce">⭐</span>
+          <div>
+            <div class="text-[10px] text-amber-700 font-bold uppercase tracking-wider">Stars</div>
+            <div id="starsScoreDisplay" class="text-xl font-heading font-black text-amber-900 leading-none">0</div>
+          </div>
+        </div>
+
+        <!-- Speech Speed Switcher -->
+        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-3 py-2 rounded-2xl">
+          <span class="text-xs font-bold text-slate-500">Speed:</span>
+          <select id="voiceSpeedSelect" class="bg-white border border-slate-300 text-xs rounded-xl px-2 py-1 font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer">
+            <option value="0.75">🐢 Slow</option>
+            <option value="0.95" selected>⚡ Normal</option>
+            <option value="1.15">🚀 Fast</option>
+          </select>
+        </div>
+
+        <!-- Voice Sample Button -->
+        <button onclick="testBritishSpeaker()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-indigo-50 border border-indigo-200 text-indigo-700 hover:bg-indigo-100 text-xs font-bold transition shadow-sm btn-bounce" title="Hear British Pronunciation">
+          <span>🔊</span>
+          <span>Sample</span>
+        </button>
+
+        <!-- Sound FX Mute Toggle -->
+        <button id="soundFxBtn" class="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition shadow-sm btn-bounce" title="Toggle Sound FX">
+          <span id="soundFxIcon" class="text-lg">🔔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Exercise Navigation Tabs (Matching sections A, B, C) -->
+    <nav class="flex items-center justify-center gap-2 sm:gap-3 mt-4 overflow-x-auto py-2">
+      <button onclick="changeSectionTab('sectionA')" id="nav-sectionA" class="nav-tab-btn px-4 sm:px-6 py-2.5 rounded-2xl font-bold text-sm sm:text-base transition-all bg-indigo-600 text-white shadow-lg shadow-indigo-300/50 flex items-center gap-2 btn-bounce">
+        <span class="bg-white/20 text-white px-2 py-0.5 rounded-lg text-xs font-black">A</span>
+        <span>A - اكتب الكلمة الناقصة (Missing Word)</span>
+      </button>
+      <button onclick="changeSectionTab('sectionB')" id="nav-sectionB" class="nav-tab-btn px-4 sm:px-6 py-2.5 rounded-2xl font-bold text-sm sm:text-base transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2 btn-bounce">
+        <span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg text-xs font-black">B</span>
+        <span>B - اقرأ وصِل (Read & Match)</span>
+      </button>
+      <button onclick="changeSectionTab('sectionC')" id="nav-sectionC" class="nav-tab-btn px-4 sm:px-6 py-2.5 rounded-2xl font-bold text-sm sm:text-base transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 flex items-center gap-2 btn-bounce">
+        <span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg text-xs font-black">C</span>
+        <span>C - اكتب الحرف الناقص (Missing Letter)</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Activities Container -->
+  <main class="max-w-6xl mx-auto space-y-6">
+
+    <!-- ==================== EXERCISE A: WRITE THE MISSING WORD ==================== -->
+    <section id="view-sectionA" class="section-view block space-y-6">
+      
+      <!-- Instructions Card -->
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-xl border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 font-heading font-black text-xl flex items-center justify-center shrink-0 border border-amber-300">
+            A
+          </div>
+          <div>
+            <h2 class="text-xl font-heading font-black text-slate-900">A- Write the missing word (اكتب الكلمة الناقصة)</h2>
+            <p class="text-sm text-slate-500">انقر على أيقونة الصوت لسماع الجملة الإنجليزية مع توهج الصورة، واختر الكلمة المناسبة أو اكتبها في الفراغ.</p>
+          </div>
+        </div>
+
+        <button onclick="readAllSentencesSectionA()" id="playAllSectionABtn" class="px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-md hover:opacity-95 transition btn-bounce flex items-center gap-2 shrink-0">
+          <span>▶️ تشغيل وقراءة جميع الجمل تلقائياً</span>
+        </button>
+      </div>
+
+      <!-- Quick Word Bank Chips -->
+      <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-2xl p-4">
+        <div class="text-xs font-black uppercase text-indigo-700 tracking-wider mb-2.5 flex items-center gap-2">
+          <span>💡 بنك الكلمات (Word Bank)</span>
+          <span class="text-[11px] font-normal text-indigo-500">(اضغط على الكلمة لملء الفراغ المحدد مباشرة)</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="sectionAWordBank">
+          <!-- Dynamically inserted words -->
+        </div>
+      </div>
+
+      <!-- Exercise A Sentences List -->
+      <div class="space-y-4" id="sectionASentencesList">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== EXERCISE B: READ AND MATCH ==================== -->
+    <section id="view-sectionB" class="section-view hidden space-y-6">
+      
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-xl border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 font-heading font-black text-xl flex items-center justify-center shrink-0 border border-emerald-300">
+            B
+          </div>
+          <div>
+            <h2 class="text-xl font-heading font-black text-slate-900">B- Read and match (اقرأ وصِل)</h2>
+            <p class="text-sm text-slate-500">اقرأ واستمع للجملة بالإنجليزية مع ترجمتها العربية، ثم اضغط على الصورة المناسبة لتوصيلهما معاً.</p>
+          </div>
+        </div>
+
+        <button onclick="resetSectionB()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs sm:text-sm transition btn-bounce flex items-center gap-1.5">
+          <span>🔄 إعادة خلط وتوصيل</span>
+        </button>
+      </div>
+
+      <!-- Interactive Matching Arena -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          
+          <!-- Column 1: Sentences -->
+          <div class="space-y-4" id="sectionBSentencesCol">
+            <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">1. Sentences (Tap to Listen)</h3>
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Column 2: Picture Cards -->
+          <div class="space-y-4" id="sectionBPicturesCol">
+            <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">2. Matching Pictures</h3>
+            <!-- Rendered by JS -->
+          </div>
+
+        </div>
+
+        <!-- Section B Victory Banner -->
+        <div id="sectionBVictoryBox" class="mt-8 text-center hidden">
+          <div class="p-6 bg-emerald-50 rounded-3xl border-2 border-emerald-300">
+            <span class="text-5xl block mb-2">🎉</span>
+            <h3 class="text-2xl font-black text-emerald-900 font-heading">أحسنت صنعاً! تم توصيل جميع البطاقات بنجاح</h3>
+            <p class="text-emerald-700 text-sm mt-1">لقد قمت بمطابقة كل جملة مع شخصيتها التوضيحية الصحيحة وترجمتها.</p>
+            <button onclick="resetSectionB()" class="mt-4 px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-2xl shadow-md hover:bg-emerald-700 transition btn-bounce">
+              العب مرة أخرى 🔄
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EXERCISE C: WRITE THE MISSING LETTER ==================== -->
+    <section id="view-sectionC" class="section-view hidden space-y-6">
+      
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-xl border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 font-heading font-black text-xl flex items-center justify-center shrink-0 border border-purple-300">
+            C
+          </div>
+          <div>
+            <h2 class="text-xl font-heading font-black text-slate-900">C- Write the missing letter (اكتب الحرف الناقص)</h2>
+            <p class="text-sm text-slate-500">اختر الحرف الإنجليزي الناقص لإكمال الكلمة، وتعرّف على معناها بالعربية واستمع لنطقها الفوري.</p>
+          </div>
+        </div>
+
+        <button onclick="resetSectionC()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs sm:text-sm transition btn-bounce flex items-center gap-1.5">
+          <span>🔄 إعادة ترتيب الحروف</span>
+        </button>
+      </div>
+
+      <!-- Missing Letters Grid -->
+      <div id="sectionCGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Interactive Toast Notification -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 transform translate-y-32 opacity-0 transition-all duration-300 z-50 bg-slate-900/95 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/20">
+    <span id="toastIcon" class="text-2xl">✨</span>
+    <span id="toastMsg" class="font-bold text-sm">Well done!</span>
+  </div>
+
+  <script>
+    // Embedded High-Fidelity SVG Illustrations matching the worksheet exactly
+    const ASSETS = {
+      lion: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <path d="M80 15 C105 15, 125 30, 138 52 C150 75, 145 105, 130 125 C115 142, 95 148, 80 148 C65 148, 45 142, 30 125 C15 105, 10 75, 22 52 C35 30, 55 15, 80 15 Z" fill="#d97706" />
+          <path d="M80 20 C102 20, 120 33, 132 54 C142 74, 138 100, 125 118 C112 133, 95 140, 80 140 C65 140, 48 133, 35 118 C22 100, 18 74, 28 54 C40 33, 58 20, 80 20 Z" fill="#f59e0b" />
+          <circle cx="48" cy="46" r="14" fill="#d97706" />
+          <circle cx="48" cy="46" r="8" fill="#fef3c7" />
+          <circle cx="112" cy="46" r="14" fill="#d97706" />
+          <circle cx="112" cy="46" r="8" fill="#fef3c7" />
+          <ellipse cx="80" cy="82" rx="42" ry="38" fill="#fde68a" />
+          <circle cx="64" cy="74" r="7" fill="#1e293b" />
+          <circle cx="62" cy="72" r="2.5" fill="#ffffff" />
+          <circle cx="96" cy="74" r="7" fill="#1e293b" />
+          <circle cx="94" cy="72" r="2.5" fill="#ffffff" />
+          <ellipse cx="80" cy="94" rx="20" ry="12" fill="#fffbeb" />
+          <path d="M74 86 L86 86 L80 94 Z" fill="#b45309" />
+          <path d="M80 94 L80 100 M75 100 C78 102, 82 102, 85 100" stroke="#78350f" stroke-width="2" stroke-linecap="round" fill="none" />
+          <path d="M76 100 Q80 106 84 100 Z" fill="#ef4444" />
+          <circle cx="56" cy="85" r="5" fill="#fca5a5" opacity="0.6" />
+          <circle cx="104" cy="85" r="5" fill="#fca5a5" opacity="0.6" />
+        </svg>
+      `,
+      snail: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <path d="M48 60 Q42 40 38 32" stroke="#fcd34d" stroke-width="5" stroke-linecap="round" fill="none" />
+          <circle cx="38" cy="32" r="6" fill="#f59e0b" />
+          <path d="M60 60 Q66 40 70 32" stroke="#fcd34d" stroke-width="5" stroke-linecap="round" fill="none" />
+          <circle cx="70" cy="32" r="6" fill="#f59e0b" />
+          <path d="M26 128 C22 118, 30 75, 54 64 C70 56, 75 75, 76 90 L136 128 C144 133, 138 138, 126 138 L38 138 C28 138, 24 134, 26 128 Z" fill="#fde68a" />
+          <circle cx="48" cy="62" r="4" fill="#1e293b" />
+          <circle cx="47" cy="60" r="1.5" fill="#ffffff" />
+          <path d="M42 74 Q48 80 54 75" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" fill="none" />
+          <circle cx="40" cy="71" r="3.5" fill="#f87171" opacity="0.7" />
+          <circle cx="100" cy="94" rx="36" ry="34" fill="#fb923c" />
+          <ellipse cx="100" cy="94" rx="28" ry="26" fill="#f97316" />
+          <ellipse cx="100" cy="94" rx="20" ry="18" fill="#ea580c" />
+          <path d="M100 94 Q106 88 108 94 Q110 102 102 104 Q90 106 88 94 Q86 80 102 78 Q118 76 120 96" fill="none" stroke="#fed7aa" stroke-width="4.5" stroke-linecap="round" />
+        </svg>
+      `,
+      giraffe_tall: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <rect x="36" y="22" width="16" height="120" rx="2" fill="#f8fafc" stroke="#64748b" stroke-width="2" />
+          <line x1="36" y1="35" x2="48" y2="35" stroke="#334155" stroke-width="2" />
+          <line x1="36" y1="55" x2="48" y2="55" stroke="#334155" stroke-width="2" />
+          <line x1="36" y1="75" x2="48" y2="75" stroke="#334155" stroke-width="2" />
+          <line x1="36" y1="95" x2="48" y2="95" stroke="#334155" stroke-width="2" />
+          <line x1="36" y1="115" x2="48" y2="115" stroke="#334155" stroke-width="2" />
+          <line x1="36" y1="135" x2="48" y2="135" stroke="#334155" stroke-width="2" />
+          <line x1="97" y1="28" x2="95" y2="20" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+          <circle cx="95" cy="19" r="3.5" fill="#78350f" />
+          <line x1="107" y1="28" x2="109" y2="20" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+          <circle cx="109" cy="19" r="3.5" fill="#78350f" />
+          <ellipse cx="102" cy="35" rx="14" ry="12" fill="#fbbf24" />
+          <circle cx="97" cy="33" r="3" fill="#1e293b" />
+          <ellipse cx="102" cy="41" rx="8" ry="5" fill="#fef3c7" />
+          <path d="M96 44 L92 125 L114 125 L108 44 Z" fill="#fbbf24" />
+          <ellipse cx="100" cy="56" rx="4" ry="5" fill="#b45309" />
+          <ellipse cx="105" cy="74" rx="5" ry="6" fill="#b45309" />
+          <ellipse cx="98" cy="92" rx="4.5" ry="5" fill="#b45309" />
+          <ellipse cx="106" cy="110" rx="6" ry="5" fill="#b45309" />
+          <rect x="88" y="125" width="28" height="18" rx="4" fill="#f59e0b" />
+          <rect x="91" y="140" width="5" height="10" fill="#b45309" />
+          <rect x="110" y="140" width="5" height="10" fill="#b45309" />
+        </svg>
+      `,
+      tired_boy: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <rect x="62" y="14" width="36" height="18" rx="4" fill="#ffffff" stroke="#ef4444" stroke-width="2.5" />
+          <rect x="98" y="19" width="4" height="8" rx="1.5" fill="#ef4444" />
+          <rect x="65" y="17" width="8" height="12" rx="2" fill="#ef4444" />
+          <path d="M42 30 Q44 24 46 30 Q48 36 42 36 Z" fill="#38bdf8" />
+          <path d="M116 32 Q118 26 120 32 Q122 38 116 38 Z" fill="#38bdf8" />
+          <path d="M40 145 C42 120, 60 110, 80 110 C100 110, 118 120, 120 145 Z" fill="#475569" />
+          <ellipse cx="80" cy="78" rx="30" ry="34" fill="#fed7aa" />
+          <path d="M50 72 C48 50, 60 40, 80 40 C100 40, 112 50, 110 72 C105 60, 95 56, 80 58 C65 56, 55 62, 50 72 Z" fill="#334155" />
+          <path d="M64 74 Q70 71 76 76" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none" />
+          <path d="M84 76 Q90 71 96 74" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none" />
+          <path d="M64 80 Q70 85 76 81" stroke="#94a3b8" stroke-width="2" fill="none" opacity="0.7" />
+          <path d="M84 81 Q90 85 96 80" stroke="#94a3b8" stroke-width="2" fill="none" opacity="0.7" />
+          <path d="M74 98 Q80 93 86 98" stroke="#7c2d12" stroke-width="2.5" stroke-linecap="round" fill="none" />
+          <path d="M44 95 C46 80, 56 68, 62 66 C65 72, 60 84, 52 98 Z" fill="#fed7aa" stroke="#fb923c" stroke-width="1.5" />
+          <path d="M116 95 C114 80, 104 68, 98 66 C95 72, 100 84, 108 98 Z" fill="#fed7aa" stroke="#fb923c" stroke-width="1.5" />
+        </svg>
+      `,
+      comic_book: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <path d="M22 128 L76 138 L80 50 L26 40 Z" fill="#0284c7" />
+          <path d="M138 128 L84 138 L80 50 L134 40 Z" fill="#0369a1" />
+          <path d="M26 124 C45 120, 68 126, 78 132 L78 46 C66 40, 45 36, 26 42 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
+          <path d="M134 124 C115 120, 92 126, 82 132 L82 46 C94 40, 115 36, 134 42 Z" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" />
+          <line x1="80" y1="44" x2="80" y2="134" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+          <rect x="33" y="50" width="38" height="32" rx="3" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.8" />
+          <ellipse cx="52" cy="62" rx="11" ry="7" fill="#fef08a" stroke="#0f172a" stroke-width="1.5" />
+          <path d="M52 69 L48 74 L55 68 Z" fill="#fef08a" stroke="#0f172a" stroke-width="1.2" />
+          <text x="46" y="65" font-size="7" font-weight="bold" fill="#0f172a">Hi!</text>
+          <rect x="33" y="87" width="38" height="30" rx="3" fill="#e0f2fe" stroke="#0f172a" stroke-width="1.8" />
+          <rect x="89" y="50" width="38" height="67" rx="3" fill="#fef9c3" stroke="#0f172a" stroke-width="1.8" />
+          <circle cx="108" cy="74" r="10" fill="#f87171" stroke="#0f172a" stroke-width="1.5" />
+          <path d="M108 94 L111 100 L118 100 L113 104 L115 111 L108 107 L102 111 L104 104 L99 100 L106 100 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1" />
+        </svg>
+      `,
+      rainbow: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <path d="M25 105 A55 55 0 0 1 135 105" fill="none" stroke="#ef4444" stroke-width="8" stroke-linecap="round" />
+          <path d="M31 105 A48 48 0 0 1 129 105" fill="none" stroke="#f97316" stroke-width="7" stroke-linecap="round" />
+          <path d="M37 105 A41 41 0 0 1 123 105" fill="none" stroke="#facc15" stroke-width="7" stroke-linecap="round" />
+          <path d="M43 105 A34 34 0 0 1 117 105" fill="none" stroke="#22c55e" stroke-width="7" stroke-linecap="round" />
+          <path d="M49 105 A27 27 0 0 1 111 105" fill="none" stroke="#3b82f6" stroke-width="7" stroke-linecap="round" />
+          <path d="M55 105 A20 20 0 0 1 105 105" fill="none" stroke="#8b5cf6" stroke-width="7" stroke-linecap="round" />
+          <g fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.5">
+            <circle cx="28" cy="115" r="14" />
+            <circle cx="44" cy="112" r="18" />
+            <circle cx="58" cy="118" r="13" />
+            <rect x="25" y="118" width="38" height="12" fill="#e0f2fe" stroke="none" />
+          </g>
+          <g fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5">
+            <circle cx="104" cy="118" r="13" />
+            <circle cx="120" cy="112" r="18" />
+            <circle cx="136" cy="115" r="14" />
+            <rect x="104" y="118" width="38" height="12" fill="#f8fafc" stroke="none" />
+          </g>
+        </svg>
+      `,
+      mountain: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <polygon points="40,135 90,48 140,135" fill="#334155" />
+          <polygon points="90,48 78,72 88,68 90,75 96,69 102,74" fill="#f1f5f9" />
+          <polygon points="15,135 60,65 105,135" fill="#1e293b" />
+          <polygon points="60,65 48,88 56,84 62,90 68,83 74,89" fill="#f8fafc" />
+          <polygon points="65,135 110,60 155,135" fill="#0f172a" />
+          <polygon points="110,60 98,82 106,78 112,85 118,79 124,84" fill="#ffffff" />
+        </svg>
+      `,
+      tall_girl: `
+        <svg viewBox="0 0 160 160" class="w-full h-full drop-shadow-md">
+          <!-- Hair back -->
+          <ellipse cx="80" cy="38" rx="19" ry="24" fill="#92400e" />
+          <path d="M62 42 Q60 75 66 85 Q72 70 70 50 Z" fill="#92400e" />
+          <path d="M98 42 Q100 75 94 85 Q88 70 90 50 Z" fill="#92400e" />
+          <!-- Head / Face -->
+          <circle cx="80" cy="38" r="14" fill="#fed7aa" />
+          <circle cx="75" cy="36" r="1.8" fill="#1e293b" />
+          <circle cx="85" cy="36" r="1.8" fill="#1e293b" />
+          <path d="M77 42 Q80 45 83 42" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" fill="none" />
+          <path d="M67 32 Q80 26 93 32 Q85 24 75 25 Z" fill="#78350f" />
+          <rect x="77" y="50" width="6" height="6" fill="#fed7aa" />
+          <!-- Yellow T-Shirt -->
+          <path d="M70 55 L90 55 L93 84 L67 84 Z" fill="#eab308" />
+          <path d="M68 55 L60 66 L65 70 L72 61 Z" fill="#facc15" />
+          <path d="M92 55 L100 66 L95 70 L88 61 Z" fill="#facc15" />
+          <!-- Arms -->
+          <rect x="61" y="68" width="5" height="20" rx="2.5" fill="#fed7aa" />
+          <rect x="94" y="68" width="5" height="20" rx="2.5" fill="#fed7aa" />
+          <!-- Teal Trousers -->
+          <path d="M68 84 L92 84 L90 135 L82 135 L80 96 L78 135 L70 135 Z" fill="#0d9488" />
+          <!-- Shoes -->
+          <ellipse cx="69" cy="138" rx="6" ry="3.5" fill="#e11d48" />
+          <ellipse cx="91" cy="138" rx="6" ry="3.5" fill="#e11d48" />
+        </svg>
+      `
+    };
+
+    // Exercise A Data from image
+    const EXERCISE_A_DATA = [
+      {
+        id: 1,
+        prefix: "The",
+        answer: "snail",
+        accepted: ["snail"],
+        suffix: "is the slowest animal.",
+        fullSentence: "The snail is the slowest animal.",
+        arabicSentence: "الحلزون هو أبطأ حيوان.",
+        arabicWord: "حلزون",
+        assetKey: "snail",
+        hint: "A gentle creature carrying a spiral shell."
+      },
+      {
+        id: 2,
+        prefix: "The giraffe is",
+        answer: "tall",
+        accepted: ["tall"],
+        suffix: ".",
+        fullSentence: "The giraffe is tall.",
+        arabicSentence: "الزرافة طويلة القامة.",
+        arabicWord: "طويل",
+        assetKey: "giraffe_tall",
+        hint: "Having great height."
+      },
+      {
+        id: 3,
+        prefix: "My brother is",
+        answer: "tired",
+        accepted: ["tired"],
+        suffix: "today.",
+        fullSentence: "My brother is tired today.",
+        arabicSentence: "أخي متعب اليوم.",
+        arabicWord: "متعب",
+        assetKey: "tired_boy",
+        hint: "Low on energy and needing sleep."
+      },
+      {
+        id: 4,
+        prefix: "Look at the sky, You can see a",
+        answer: "rainbow",
+        accepted: ["rainbow"],
+        suffix: ".",
+        fullSentence: "Look at the sky, You can see a rainbow.",
+        arabicSentence: "انظر إلى السماء، يمكنك أن ترى قوس قزح.",
+        arabicWord: "قوس قزح",
+        assetKey: "rainbow",
+        hint: "A colorful arc of light in the sky."
+      },
+      {
+        id: 5,
+        prefix: "Let’s climb the",
+        answer: "mountain",
+        accepted: ["mountain"],
+        suffix: ".",
+        fullSentence: "Let’s climb the mountain.",
+        arabicSentence: "دعنا نتسلق الجبل.",
+        arabicWord: "جبل",
+        assetKey: "mountain",
+        hint: "A towering natural rocky peak."
+      },
+      {
+        id: 6,
+        prefix: "He always reads",
+        answer: "comic books",
+        accepted: ["comic books", "comic book"],
+        suffix: ".",
+        fullSentence: "He always reads comic books.",
+        arabicSentence: "هو دائماً يقرأ القصص المصورة.",
+        arabicWord: "قصة مصورة",
+        assetKey: "comic_book",
+        hint: "An illustrated story book."
+      },
+      {
+        id: 7,
+        prefix: "The",
+        answer: "lion",
+        accepted: ["lion"],
+        suffix: "is faster than the elephant.",
+        fullSentence: "The lion is faster than the elephant.",
+        arabicSentence: "الأسد أسرع من الفيل.",
+        arabicWord: "أسد",
+        assetKey: "lion",
+        hint: "The king of the jungle."
+      }
+    ];
+
+    // Exercise B Data from image: Read and match
+    const EXERCISE_B_DATA = [
+      {
+        id: "b1",
+        sentence: "She is tall.",
+        arabicSentence: "هي طويلة.",
+        assetKey: "tall_girl",
+        label: "فتاة طويلة (Tall Girl)"
+      },
+      {
+        id: "b2",
+        sentence: "He is tired.",
+        arabicSentence: "هو متعب.",
+        assetKey: "tired_boy",
+        label: "ولد متعب (Tired Boy)"
+      },
+      {
+        id: "b3",
+        sentence: "The snail is slow.",
+        arabicSentence: "الحلزون بطيء.",
+        assetKey: "snail",
+        label: "حلزون بطيء (Slow Snail)"
+      },
+      {
+        id: "b4",
+        sentence: "Ali likes comic books.",
+        arabicSentence: "علي يحب القصص المصورة.",
+        assetKey: "comic_book",
+        label: "قصة مصورة (Comic Book)"
+      }
+    ];
+
+    // Exercise C Data from image: Write the missing letter
+    const EXERCISE_C_DATA = [
+      {
+        id: "c1",
+        word: "lion",
+        arabicWord: "أسد",
+        displayPrefix: "Li",
+        missingLetter: "o",
+        displaySuffix: "n",
+        options: ["o", "a", "u", "e"],
+        assetKey: "lion"
+      },
+      {
+        id: "c2",
+        word: "snail",
+        arabicWord: "حلزون",
+        displayPrefix: "Sn",
+        missingLetter: "a",
+        displaySuffix: "il",
+        options: ["a", "e", "o", "i"],
+        assetKey: "snail"
+      },
+      {
+        id: "c3",
+        word: "tall",
+        arabicWord: "طويل",
+        displayPrefix: "ta",
+        missingLetter: "l",
+        displaySuffix: "l",
+        options: ["l", "b", "d", "t"],
+        assetKey: "giraffe_tall"
+      },
+      {
+        id: "c4",
+        word: "tired",
+        arabicWord: "متعب",
+        displayPrefix: "Ti",
+        missingLetter: "r",
+        displaySuffix: "ed",
+        options: ["r", "n", "m", "l"],
+        assetKey: "tired_boy"
+      },
+      {
+        id: "c5",
+        word: "mountain",
+        arabicWord: "جبل",
+        displayPrefix: "Moun",
+        missingLetter: "t",
+        displaySuffix: "ain",
+        options: ["t", "d", "p", "c"],
+        assetKey: "mountain"
+      },
+      {
+        id: "c6",
+        word: "rainbow",
+        arabicWord: "قوس قزح",
+        displayPrefix: "Rain",
+        missingLetter: "b",
+        displaySuffix: "ow",
+        options: ["b", "p", "d", "v"],
+        assetKey: "rainbow"
+      }
+    ];
+
+    // Web Audio Synthesizer
+    class SoundSynth {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+      playTone(freq, type = 'sine', duration = 0.15, gainVal = 0.15) {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + duration);
+        } catch(e) {
+          console.warn(e);
+        }
+      }
+      playCorrect() {
+        this.playTone(523.25, 'triangle', 0.12, 0.2); // C5
+        setTimeout(() => this.playTone(659.25, 'triangle', 0.14, 0.2), 100); // E5
+        setTimeout(() => this.playTone(783.99, 'triangle', 0.18, 0.22), 200); // G5
+        setTimeout(() => this.playTone(1046.50, 'triangle', 0.28, 0.25), 310); // C6
+      }
+      playWrong() {
+        this.playTone(320.0, 'sawtooth', 0.15, 0.16);
+        setTimeout(() => this.playTone(260.0, 'sawtooth', 0.25, 0.16), 130);
+      }
+      playPop() {
+        this.playTone(500, 'sine', 0.08, 0.12);
+      }
+      playClick() {
+        this.playTone(700, 'sine', 0.04, 0.08);
+      }
+    }
+    const audioSynth = new SoundSynth();
+
+    // British Female Speech Engine with Accurate Picture-Word Synchronized Highlight
+    const speechEngine = {
+      voices: [],
+      init() {
+        if ('speechSynthesis' in window) {
+          const loadVoices = () => {
+            this.voices = window.speechSynthesis.getVoices();
+          };
+          loadVoices();
+          if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+          }
+        }
+      },
+      getBritishFemaleVoice() {
+        if (!this.voices || this.voices.length === 0) {
+          this.voices = window.speechSynthesis.getVoices();
+        }
+
+        const gbVoices = this.voices.filter(v => 
+          v.lang === 'en-GB' || 
+          v.lang === 'en_GB' || 
+          v.lang.toLowerCase().startsWith('en-gb')
+        );
+
+        const femaleKeywords = [
+          'female', 'hazel', 'susan', 'serena', 'sonia', 'libby', 'fiona', 
+          'kate', 'victoria', 'martha', 'alice', 'amy', 'olivia', 'stephanie', 
+          'mia', 'emma', 'clara', 'natural'
+        ];
+
+        // 1. Explicit British female
+        const explicitGbFemale = gbVoices.find(v => {
+          const name = v.name.toLowerCase();
+          return femaleKeywords.some(k => name.includes(k));
+        });
+        if (explicitGbFemale) return explicitGbFemale;
+
+        // 2. Google UK English Female
+        const googleUk = gbVoices.find(v => v.name.includes('Google UK English Female'));
+        if (googleUk) return googleUk;
+
+        // 3. Any British non-male
+        const maleNames = ['male', 'george', 'david', 'oliver', 'daniel', 'richard', 'brian'];
+        const nonMaleGb = gbVoices.find(v => {
+          const name = v.name.toLowerCase();
+          return !maleNames.some(m => name.includes(m));
+        });
+        if (nonMaleGb) return nonMaleGb;
+
+        // 4. Any British voice
+        if (gbVoices.length > 0) return gbVoices[0];
+
+        // 5. Commonwealth female fallback
+        const commonwealthFemale = this.voices.find(v => 
+          (v.lang.startsWith('en-IE') || v.lang.startsWith('en-AU') || v.lang.startsWith('en-NZ')) &&
+          femaleKeywords.some(k => v.name.toLowerCase().includes(k))
+        );
+        if (commonwealthFemale) return commonwealthFemale;
+
+        // 6. Any English voice
+        return this.voices.find(v => v.lang.startsWith('en')) || null;
+      },
+      speakWithSync({ text, imageElementId, textElementId, onStart, onEnd }) {
+        if (!('speechSynthesis' in window)) {
+          showToast("Speech synthesis not supported in this browser", "⚠️");
+          if (onStart) onStart();
+          setTimeout(() => { if (onEnd) onEnd(); }, 1200);
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        const speedSelect = document.getElementById('voiceSpeedSelect');
+        utterance.rate = speedSelect ? parseFloat(speedSelect.value) : 0.95;
+        utterance.lang = 'en-GB';
+        utterance.pitch = 1.08;
+
+        const voice = this.getBritishFemaleVoice();
+        if (voice) {
+          utterance.voice = voice;
+        }
+
+        const imgEl = imageElementId ? document.getElementById(imageElementId) : null;
+        const txtEl = textElementId ? document.getElementById(textElementId) : null;
+
+        utterance.onstart = () => {
+          if (imgEl) imgEl.classList.add('sync-image-active');
+          if (txtEl) txtEl.classList.add('sync-word-active');
+          if (onStart) onStart();
+        };
+
+        utterance.onend = () => {
+          if (imgEl) imgEl.classList.remove('sync-image-active');
+          if (txtEl) txtEl.classList.remove('sync-word-active');
+          if (onEnd) onEnd();
+        };
+
+        utterance.onerror = () => {
+          if (imgEl) imgEl.classList.remove('sync-image-active');
+          if (txtEl) txtEl.classList.remove('sync-word-active');
+          if (onEnd) onEnd();
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+    };
+
+    function testBritishSpeaker() {
+      audioSynth.playPop();
+      showToast("British Voice: 'Welcome to Glory English Academy!'", "🇬🇧");
+      speechEngine.speakWithSync({
+        text: "Welcome to Glory English Academy! Let's practice English together."
+      });
+    }
+
+    // State Tracking
+    let userStars = 0;
+    let selectedSentenceAId = null;
+
+    // Section B matching state
+    let sectionBSelectedSentence = null;
+    let sectionBSelectedPicture = null;
+    let sectionBMatchedCount = 0;
+
+    function addStars(amount) {
+      userStars += amount;
+      const display = document.getElementById('starsScoreDisplay');
+      if (display) {
+        display.textContent = userStars;
+        display.classList.add('scale-125', 'text-amber-500');
+        setTimeout(() => display.classList.remove('scale-125', 'text-amber-500'), 250);
+      }
+    }
+
+    // Render Section A: Missing Words
+    function renderSectionA() {
+      const bank = document.getElementById('sectionAWordBank');
+      const list = document.getElementById('sectionASentencesList');
+      bank.innerHTML = '';
+      list.innerHTML = '';
+
+      // Word bank unique choices with Arabic meanings
+      const words = [
+        { en: "snail", ar: "حلزون" },
+        { en: "tall", ar: "طويل" },
+        { en: "tired", ar: "متعب" },
+        { en: "rainbow", ar: "قوس قزح" },
+        { en: "mountain", ar: "جبل" },
+        { en: "comic books", ar: "قصة مصورة" },
+        { en: "lion", ar: "أسد" }
+      ].sort(() => Math.random() - 0.5);
+
+      words.forEach(item => {
+        const chip = document.createElement('button');
+        chip.className = "px-3.5 py-2 rounded-xl bg-white border-2 border-indigo-200 hover:border-indigo-500 text-indigo-900 font-bold text-sm shadow-sm transition btn-bounce flex items-center gap-1.5";
+        chip.innerHTML = `<span>✏️ ${item.en}</span><span class="text-xs text-indigo-500 font-medium font-sans">(${item.ar})</span>`;
+        chip.onclick = () => selectWordBankWord(item.en);
+        bank.appendChild(chip);
+      });
+
+      // Sentences from worksheet A with Arabic Translation display
+      EXERCISE_A_DATA.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.id = `secA-row-${item.id}`;
+        row.className = "bg-white rounded-3xl p-4 sm:p-5 shadow-md border-2 border-slate-100 hover:border-indigo-200 transition-all flex flex-col md:flex-row items-center justify-between gap-4";
+
+        row.innerHTML = `
+          <!-- Left: Number & Sentence with Blank + Arabic Subtitle -->
+          <div class="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 w-full">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 font-heading font-black text-sm flex items-center justify-center shrink-0 mt-1 sm:mt-0">
+              ${index + 1}
+            </span>
+
+            <div class="flex-1 space-y-1.5">
+              <!-- English Sentence with Input Slot -->
+              <div class="flex flex-wrap items-center gap-2 text-base sm:text-lg font-bold text-slate-800" id="sentence-container-${item.id}">
+                <span id="text-prefix-${item.id}">${item.prefix}</span>
+                
+                <div class="relative inline-block">
+                  <input 
+                    type="text" 
+                    id="input-blank-${item.id}"
+                    placeholder="............."
+                    onfocus="onBlankFocus(${item.id})"
+                    oninput="checkSectionAInput(${item.id})"
+                    class="bg-indigo-50/50 hover:bg-indigo-50 focus:bg-white text-indigo-900 font-black text-center px-3 py-1.5 rounded-xl border-2 border-dashed border-indigo-300 focus:border-indigo-600 focus:outline-none transition-all w-36 sm:w-44 placeholder:text-slate-400 placeholder:tracking-widest"
+                  />
+                  <span id="badge-check-${item.id}" class="hidden absolute -right-3 -top-2 text-lg">✅</span>
+                </div>
+
+                <span id="text-suffix-${item.id}">${item.suffix}</span>
+              </div>
+
+              <!-- Arabic Translation Banner -->
+              <div class="flex items-center gap-2 text-xs sm:text-sm text-indigo-700 bg-indigo-50/80 px-3 py-1 rounded-xl w-fit font-medium" dir="rtl">
+                <span class="font-bold">🇸🇦 الترجمة:</span>
+                <span>${item.arabicSentence}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Sound Button & Picture Hint with Synchronized Glow -->
+          <div class="flex items-center gap-3 self-end md:self-center shrink-0">
+            <button 
+              onclick="speakSectionASentence(${item.id})" 
+              class="p-3 rounded-2xl bg-indigo-50 border border-indigo-200 text-indigo-700 hover:bg-indigo-100 transition shadow-sm btn-bounce flex items-center gap-1.5"
+              title="Listen to full sentence with synchronized picture glow"
+            >
+              <span class="text-lg">🔊</span>
+              <span class="text-xs font-bold hidden sm:inline">استمع</span>
+            </button>
+
+            <div 
+              id="hint-img-container-${item.id}" 
+              onclick="speakSectionASentence(${item.id})"
+              class="w-20 h-20 sm:w-22 sm:h-22 bg-slate-50 border-2 border-slate-200 rounded-2xl p-1.5 flex items-center justify-center cursor-pointer transition-all duration-300 relative group"
+              title="Click to hear sound and see synchronization"
+            >
+              ${ASSETS[item.assetKey]}
+              <span class="absolute bottom-1 right-1 opacity-0 group-hover:opacity-100 text-[10px] bg-slate-800/80 text-white px-1.5 py-0.5 rounded-md font-bold transition">
+                نطق 🎙️
+              </span>
+            </div>
+          </div>
+        `;
+
+        list.appendChild(row);
+      });
+    }
+
+    function onBlankFocus(id) {
+      selectedSentenceAId = id;
+    }
+
+    function selectWordBankWord(word) {
+      audioSynth.playClick();
+      // If none selected, default to first empty input
+      if (!selectedSentenceAId) {
+        const firstEmpty = EXERCISE_A_DATA.find(item => {
+          const val = document.getElementById(`input-blank-${item.id}`).value.trim();
+          return !val;
+        });
+        if (firstEmpty) {
+          selectedSentenceAId = firstEmpty.id;
+        } else {
+          selectedSentenceAId = 1;
+        }
+      }
+
+      const input = document.getElementById(`input-blank-${selectedSentenceAId}`);
+      if (input) {
+        input.value = word;
+        checkSectionAInput(selectedSentenceAId);
+      }
+    }
+
+    function checkSectionAInput(id) {
+      const item = EXERCISE_A_DATA.find(x => x.id === id);
+      if (!item) return;
+
+      const input = document.getElementById(`input-blank-${id}`);
+      const checkBadge = document.getElementById(`badge-check-${id}`);
+      const val = input.value.trim().toLowerCase();
+
+      const isCorrect = item.accepted.some(acc => acc.toLowerCase() === val);
+
+      if (isCorrect) {
+        audioSynth.playCorrect();
+        input.classList.remove('border-dashed', 'border-indigo-300', 'bg-indigo-50/50');
+        input.classList.add('border-solid', 'border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+        input.disabled = true;
+        if (checkBadge) checkBadge.classList.remove('hidden');
+
+        addStars(10);
+        showToast(`Correct! "${item.answer}"`, "🎉");
+        fireConfetti(0.3);
+
+        // Pronounce sentence with sound-image sync
+        speakSectionASentence(id);
+      }
+    }
+
+    function speakSectionASentence(id, onComplete) {
+      const item = EXERCISE_A_DATA.find(x => x.id === id);
+      if (!item) return;
+
+      audioSynth.playPop();
+      const imgId = `hint-img-container-${item.id}`;
+      const txtContainerId = `sentence-container-${item.id}`;
+
+      speechEngine.speakWithSync({
+        text: item.fullSentence,
+        imageElementId: imgId,
+        textElementId: txtContainerId,
+        onEnd: () => {
+          if (onComplete) onComplete();
+        }
+      });
+    }
+
+    function readAllSentencesSectionA() {
+      const btn = document.getElementById('playAllSectionABtn');
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+
+      let idx = 0;
+      function nextSentence() {
+        if (idx >= EXERCISE_A_DATA.length) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-50');
+          showToast("Completed listening to all sentences!", "🌟");
+          fireConfetti(0.8);
+          return;
+        }
+
+        const item = EXERCISE_A_DATA[idx];
+        const row = document.getElementById(`secA-row-${item.id}`);
+        if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        speakSectionASentence(item.id, () => {
+          idx++;
+          setTimeout(nextSentence, 600);
+        });
+      }
+
+      nextSentence();
+    }
+
+    // Section B Logic: Read and Match
+    function renderSectionB() {
+      sectionBMatchedCount = 0;
+      sectionBSelectedSentence = null;
+      sectionBSelectedPicture = null;
+      document.getElementById('sectionBVictoryBox').classList.add('hidden');
+
+      const sentCol = document.getElementById('sectionBSentencesCol');
+      const picCol = document.getElementById('sectionBPicturesCol');
+      sentCol.innerHTML = '<h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">1. الجمل مع الترجمة (اضغط للاستماع)</h3>';
+      picCol.innerHTML = '<h3 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">2. الصور المناسبة (اضغط للتوصيل)</h3>';
+
+      const shuffledSentences = [...EXERCISE_B_DATA].sort(() => Math.random() - 0.5);
+      const shuffledPictures = [...EXERCISE_B_DATA].sort(() => Math.random() - 0.5);
+
+      // Sentences Column with Arabic Translations
+      shuffledSentences.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.id = `match-b-sent-${item.id}`;
+        card.className = "p-4 bg-slate-50 hover:bg-indigo-50/70 rounded-2xl border-2 border-slate-200 cursor-pointer transition flex items-center justify-between btn-bounce";
+        card.onclick = () => selectSectionBSentence(item.id);
+        card.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-black text-xs flex items-center justify-center shrink-0">
+              ${index + 1}
+            </span>
+            <div>
+              <span id="match-b-txt-${item.id}" class="text-base sm:text-lg font-heading font-black text-slate-800 block">
+                ${item.sentence}
+              </span>
+              <span class="text-xs font-bold text-slate-500 block mt-0.5" dir="rtl">
+                ${item.arabicSentence}
+              </span>
+            </div>
+          </div>
+          <button onclick="event.stopPropagation(); speakSectionBSentenceOnly('${item.id}')" class="p-2 text-indigo-600 hover:text-indigo-800" title="Listen">
+            🔊
+          </button>
+        `;
+        sentCol.appendChild(card);
+      });
+
+      // Pictures Column
+      shuffledPictures.forEach(item => {
+        const card = document.createElement('div');
+        card.id = `match-b-pic-${item.id}`;
+        card.className = "p-3 bg-slate-50 hover:bg-indigo-50/70 rounded-2xl border-2 border-slate-200 cursor-pointer transition flex items-center justify-between btn-bounce";
+        card.onclick = () => selectSectionBPicture(item.id);
+        card.innerHTML = `
+          <div class="flex items-center gap-4">
+            <div id="match-b-img-box-${item.id}" class="w-18 h-18 sm:w-20 sm:h-20 bg-white rounded-xl p-1 border border-slate-100 flex items-center justify-center pointer-events-none">
+              ${ASSETS[item.assetKey]}
+            </div>
+            <div>
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">اضغط للمطابقة</span>
+              <span class="text-sm font-black text-slate-700">${item.label}</span>
+            </div>
+          </div>
+          <span class="text-xl">👉</span>
+        `;
+        picCol.appendChild(card);
+      });
+    }
+
+    function speakSectionBSentenceOnly(id) {
+      const item = EXERCISE_B_DATA.find(x => x.id === id);
+      if (!item) return;
+      audioSynth.playPop();
+
+      speechEngine.speakWithSync({
+        text: item.sentence,
+        textElementId: `match-b-txt-${item.id}`,
+        imageElementId: `match-b-img-box-${item.id}`
+      });
+    }
+
+    function selectSectionBSentence(id) {
+      if (sectionBSelectedSentence === id) return;
+      audioSynth.playClick();
+
+      if (sectionBSelectedSentence) {
+        const prev = document.getElementById(`match-b-sent-${sectionBSelectedSentence}`);
+        if (prev) prev.classList.remove('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-300');
+      }
+
+      sectionBSelectedSentence = id;
+      const el = document.getElementById(`match-b-sent-${id}`);
+      if (el) el.classList.add('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-300');
+
+      speakSectionBSentenceOnly(id);
+      checkSectionBMatch();
+    }
+
+    function selectSectionBPicture(id) {
+      if (sectionBSelectedPicture === id) return;
+      audioSynth.playClick();
+
+      if (sectionBSelectedPicture) {
+        const prev = document.getElementById(`match-b-pic-${sectionBSelectedPicture}`);
+        if (prev) prev.classList.remove('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-300');
+      }
+
+      sectionBSelectedPicture = id;
+      const el = document.getElementById(`match-b-pic-${id}`);
+      if (el) el.classList.add('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-300');
+
+      checkSectionBMatch();
+    }
+
+    function checkSectionBMatch() {
+      if (!sectionBSelectedSentence || !sectionBSelectedPicture) return;
+
+      const sentCard = document.getElementById(`match-b-sent-${sectionBSelectedSentence}`);
+      const picCard = document.getElementById(`match-b-pic-${sectionBSelectedPicture}`);
+
+      if (sectionBSelectedSentence === sectionBSelectedPicture) {
+        // Matched
+        audioSynth.playCorrect();
+        addStars(15);
+        sectionBMatchedCount++;
+
+        sentCard.classList.remove('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-300');
+        picCard.classList.remove('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-300');
+
+        sentCard.classList.add('bg-emerald-50', 'border-emerald-500', 'pointer-events-none');
+        picCard.classList.add('bg-emerald-50', 'border-emerald-500', 'pointer-events-none');
+
+        showToast("Brilliant Match! ⭐", "🌟");
+
+        sectionBSelectedSentence = null;
+        sectionBSelectedPicture = null;
+
+        if (sectionBMatchedCount >= EXERCISE_B_DATA.length) {
+          fireConfetti(0.9);
+          document.getElementById('sectionBVictoryBox').classList.remove('hidden');
+        }
+
+      } else {
+        // Mismatch
+        audioSynth.playWrong();
+        showToast("Not quite! Try another match", "❌");
+
+        sentCard.classList.add('border-rose-400', 'bg-rose-50', 'shake-anim');
+        picCard.classList.add('border-rose-400', 'bg-rose-50', 'shake-anim');
+
+        setTimeout(() => {
+          sentCard.classList.remove('border-rose-400', 'bg-rose-50', 'border-indigo-600', 'ring-2', 'ring-indigo-300', 'shake-anim');
+          picCard.classList.remove('border-rose-400', 'bg-rose-50', 'border-indigo-600', 'ring-2', 'ring-indigo-300', 'shake-anim');
+          sectionBSelectedSentence = null;
+          sectionBSelectedPicture = null;
+        }, 700);
+      }
+    }
+
+    function resetSectionB() {
+      audioSynth.playPop();
+      renderSectionB();
+    }
+
+    // Section C Logic: Write the Missing Letter
+    function renderSectionC() {
+      const grid = document.getElementById('sectionCGrid');
+      grid.innerHTML = '';
+
+      EXERCISE_C_DATA.forEach(item => {
+        const card = document.createElement('div');
+        card.id = `secC-card-${item.id}`;
+        card.className = "bg-white rounded-3xl p-5 shadow-lg border-2 border-slate-100 hover:border-purple-200 transition-all flex flex-col items-center text-center justify-between relative group";
+
+        card.innerHTML = `
+          <!-- Image Box with Sound Sync Glow on click -->
+          <div 
+            id="secC-img-${item.id}"
+            onclick="speakSectionCWord('${item.id}')"
+            class="w-32 h-32 bg-slate-50 border-2 border-slate-100 rounded-2xl p-2 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105"
+            title="اضغط لسماع الكلمة والحرف"
+          >
+            ${ASSETS[item.assetKey]}
+          </div>
+
+          <!-- Incomplete Word Display -->
+          <div class="mt-4 flex items-center justify-center gap-1 text-2xl font-heading font-black text-slate-800">
+            <span>${item.displayPrefix}</span>
+            <span id="secC-slot-${item.id}" class="w-10 h-11 rounded-xl border-2 border-dashed border-purple-400 bg-purple-50 flex items-center justify-center text-purple-700">
+              _
+            </span>
+            <span>${item.displaySuffix}</span>
+          </div>
+
+          <!-- Arabic Meaning Badge -->
+          <div class="mt-1 text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1 rounded-full border border-purple-200" dir="rtl">
+            المعنى بالعربية: ${item.arabicWord}
+          </div>
+
+          <!-- Letters Option Choices -->
+          <div class="mt-4">
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">اختر الحرف الناقص:</span>
+            <div class="flex items-center justify-center gap-2" id="secC-options-${item.id}">
+              ${item.options.map(letter => `
+                <button 
+                  onclick="selectSectionCLetter('${item.id}', '${letter}', this)"
+                  class="w-10 h-10 rounded-xl bg-purple-50 hover:bg-purple-600 hover:text-white border border-purple-200 font-heading font-black text-base text-purple-900 transition btn-bounce"
+                >
+                  ${letter}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Audio Button -->
+          <button 
+            onclick="speakSectionCWord('${item.id}')"
+            class="mt-4 flex items-center gap-1.5 text-xs font-bold text-purple-600 hover:text-purple-800 hover:underline"
+          >
+            <span>🔊</span>
+            <span>استمع لنطق الكلمة بالإنجليزية</span>
+          </button>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function speakSectionCWord(id) {
+      const item = EXERCISE_C_DATA.find(x => x.id === id);
+      if (!item) return;
+      audioSynth.playPop();
+
+      speechEngine.speakWithSync({
+        text: item.word,
+        imageElementId: `secC-img-${item.id}`,
+        textElementId: `secC-slot-${item.id}`
+      });
+    }
+
+    function selectSectionCLetter(id, chosenLetter, btnElement) {
+      const item = EXERCISE_C_DATA.find(x => x.id === id);
+      if (!item) return;
+
+      const slot = document.getElementById(`secC-slot-${item.id}`);
+      const optionsBox = document.getElementById(`secC-options-${item.id}`);
+
+      if (chosenLetter === item.missingLetter) {
+        audioSynth.playCorrect();
+        slot.textContent = chosenLetter;
+        slot.classList.remove('border-dashed', 'border-purple-400', 'bg-purple-50', 'text-purple-700');
+        slot.classList.add('border-solid', 'border-emerald-500', 'bg-emerald-100', 'text-emerald-900', 'animate-bounce');
+
+        // Disable buttons for this card
+        optionsBox.querySelectorAll('button').forEach(b => {
+          b.disabled = true;
+          b.classList.add('opacity-40');
+        });
+        btnElement.classList.remove('opacity-40');
+        btnElement.classList.add('bg-emerald-600', 'text-white', 'border-emerald-700');
+
+        addStars(10);
+        showToast(`Letter '${chosenLetter}' is correct for "${item.word}"!`, "🎉");
+        fireConfetti(0.3);
+
+        // Pronounce full word with synchronized glow
+        speakSectionCWord(id);
+
+      } else {
+        audioSynth.playWrong();
+        btnElement.classList.add('bg-rose-500', 'text-white', 'shake-anim');
+        showToast(`Not '${chosenLetter}', try another letter`, "⚠️");
+        setTimeout(() => {
+          btnElement.classList.remove('bg-rose-500', 'text-white', 'shake-anim');
+        }, 500);
+      }
+    }
+
+    function resetSectionC() {
+      audioSynth.playPop();
+      renderSectionC();
+    }
+
+    // Tab Switching
+    function changeSectionTab(tabKey) {
+      audioSynth.playClick();
+
+      document.querySelectorAll('.section-view').forEach(v => v.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white', 'shadow-lg');
+        b.classList.add('bg-white', 'text-slate-600');
+      });
+
+      const targetView = document.getElementById(`view-${tabKey}`);
+      const targetBtn = document.getElementById(`nav-${tabKey}`);
+
+      if (targetView) targetView.classList.remove('hidden');
+      if (targetBtn) {
+        targetBtn.classList.remove('bg-white', 'text-slate-600');
+        targetBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-lg');
+      }
+    }
+
+    // Toast Notification helper
+    function showToast(message, icon = "✨") {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMsg').textContent = message;
+      document.getElementById('toastIcon').textContent = icon;
+
+      toast.classList.remove('translate-y-32', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-32', 'opacity-0');
+      }, 2500);
+    }
+
+    // Confetti Fireworks helper
+    function fireConfetti(ratio = 0.5) {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: Math.floor(75 * ratio),
+          spread: 70,
+          origin: { y: 0.7 }
+        });
+      }
+    }
+
+    // Sound FX Mute Button
+    const soundFxBtn = document.getElementById('soundFxBtn');
+    soundFxBtn.addEventListener('click', () => {
+      audioSynth.enabled = !audioSynth.enabled;
+      document.getElementById('soundFxIcon').textContent = audioSynth.enabled ? '🔔' : '🔕';
+      showToast(audioSynth.enabled ? "Sound effects active" : "Sound effects muted", "🔔");
+    });
+
+    // Window Load Initialization
+    window.onload = function() {
+      speechEngine.init();
+      renderSectionA();
+      renderSectionB();
+      renderSectionC();
+
+      setTimeout(() => {
+        showToast("British female voice ready 🇬🇧 Click any picture or speaker!", "🎙️");
+      }, 500);
+    };
+  </script>
+</body>
+</html>
